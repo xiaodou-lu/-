@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>酷狗音乐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .bbbox {
+            width: 800px;
+            display: flex;
+            margin: 100px auto;
+        }
+
+        .box {
+            width: 300px;
+            background-color: pink;
+        }
+
+        .head {
+            width: 300px;
+            height: 80px;
+            /*border: 1px solid palevioletred;*/
+            overflow: hidden;
+        }
+
+        .head p {
+            width: 300px;
+            height: 30px;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .head p:first-child {
+            margin-top: 20px;
+        }
+
+        .head p:last-child {
+            font-size: 14px;
+        }
+
+        .img {
+            width: 300px;
+            height: 210px;
+            /*border: 1px solid palevioletred;*/
+            text-align: center;
+        }
+
+        .img img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid palevioletred;
+        }
+
+        .lyric {
+            width: 300px;
+            height: 80px;
+            text-align: center;
+            color: white;
+            margin-top: 10px;
+            /*border: 1px solid palevioletred;*/
+        }
+
+        .progress_bar {
+            width: 300px;
+            height: 40px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            color: white;
+            /*border: 1px solid palevioletred;*/
+            padding: 10px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .bar {
+            width: 170px;
+            height: 8px;
+            border-radius: 5px;
+            background-color: #f6f6f6;
+            position: relative;
+        }
+
+        .bar1 {
+            width: 0;
+            height: 8px;
+            border-radius: 5px;
+            background-color: deeppink;
+
+        }
+
+        .progress_bar span {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50px;
+            background-color: #fff;
+            position: absolute;
+            top: -3px;
+        }
+
+        .btn {
+            width: 300px;
+            height: 60px;
+            /*border: 1px solid palevioletred;*/
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .btn > div {
+            background: url("btn.png") no-repeat;
+            margin-bottom: 20px;
+        }
+
+        .btn .pattern {
+            width: 21px;
+            height: 15px;
+            background-position: -59px -179px;
+        }
+
+        .btn .up {
+            width: 36px;
+            height: 36px;
+            background-position: -36px -143px;
+        }
+
+        .btn .start {
+            width: 60px;
+            height: 60px;
+            background-position: 0 0;
+        }
+
+        .btn .next {
+            width: 36px;
+            height: 36px;
+            background-position: -180px -143px;
+
+        }
+
+        .btn .voice {
+            width: 16px;
+            height: 16px;
+            background-position: -64px -195px;
+        }
+
+        .btn .list {
+            width: 60px;
+            height: 25px;
+            background-position: 0 -118px;
+        }
+
+        .list_box {
+            width: 500px;
+            height: 480px;
+            background-color: pink;
+            display: none;
+            border: 1px solid palevioletred;
+        }
+
+        .list_head {
+            width: 500px;
+            height: 40px;
+            /*border: 1px solid palevioletred;*/
+            position: relative;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            display: flex;
+        }
+
+        .list_head input {
+            padding-left: 10px;
+            width: 250px;
+            height: 30px;
+            border: none;
+            border-radius: 20px;
+            margin-left: 30px;
+            margin-top: 5px;
+        }
+
+        .list_head > span {
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+            background: url("search.png") no-repeat -39px -52px;
+            position: absolute;
+            left: 260px;
+            top: 10px;
+        }
+
+        .list_headr {
+            width: 170px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .list_headr p {
+            width: 30px;
+            height: 15px;
+            background: url("sprite.png") no-repeat 0 0;
+        }
+
+        .list_headr .one {
+            background-position: 0 -123px;
+        }
+
+        .list_headr .one1 {
+            background-position: 0 -157px;
+        }
+
+        .list_headr .one11 {
+            background-position: 0 -194px;
+        }
+
+        .list_headr .one111 {
+            background-position: 0 -229px;
+        }
+
+        .list_headr .one1111 {
+            background-position: 0 -283px;
+        }
+
+        .list_headr .one11111 {
+            background-position: 12px -321px;
+        }
+
+        .list_title {
+            display: flex;
+            justify-content: space-around;
+            color: white;
+            border-bottom: 1.5px solid palevioletred;
+        }
+
+        .list_title p:hover {
+            color: palevioletred;
+            font-weight: 600;
+        }
+
+        .list_title p:first-child {
+            color: palevioletred;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .list_title1 {
+            width: 500px;
+            border-bottom: 1.5px solid palevioletred;
+        }
+
+        .list_title11 {
+            width: 200px;
+            margin: 5px auto;
+            display: flex;
+            justify-content: space-around;
+            color: white;
+        }
+
+        .list_title11 p:first-child {
+            color: palevioletred;
+            font-weight: 600;
+        }
+
+        .list_center {
+            width: 500px;
+            height: 280px;
+            /*border: 1px solid palevioletred;*/
+            display: flex;
+        }
+
+        .list_centerl, .list_centerr {
+            width: 230px;
+            height: 260px;
+            /*border: 1px solid palevioletred;*/
+            padding: 10px;
+
+        }
+        .list_centerl ul{
+            height: 260px;
+            overflow-y: auto;
+        }
+        .list_centerl ul li {
+            display: flex;
+            list-style: none;
+            justify-content: space-between;
+            color: white;
+            font-size: 14px;
+            line-height: 30px;
+        }
+
+        .list_centerl ul li:hover {
+            background-color: palevioletred;
+            opacity: 0.7;
+        }
+
+        .inputtext {
+            width: 230px;
+            height: 240px;
+            padding: 10px;
+            background-color: #fff;
+            position: absolute;
+            left: 35px;
+            top: 38px;
+            display: none;
+        }
+
+        .inputtext ul {
+            width: 230px;
+            height: 240px;
+            list-style: none;
+        }
+
+        .inputtext ul li {
+            height: 30px;
+            width: 210px;
+            display: flex;
+            justify-content: space-between;
+            line-height: 30px;
+            border-bottom: 1px dashed #ccc;
+            color: #ccc;
+            font-size: 12px;
+        }
+
+        .inputtext ul li:hover {
+            background-color: #f1b2bd;
+            color: white;
+            opacity: 0.8;
+        }
+        /*.list_centerl>ul{*/
+           /**/
+        /*}*/
+
+
+    </style>
+</head>
+<body>
+<div class="bbbox">
+    <div class="box">
+        <div class="head">
+            <p>做我的猫</p>
+            <p>满舒克</p>
+        </div>
+        <div class="img">
+            <img>
+        </div>
+        <div class="lyric">
+            <p>歌词</p>
+        </div>
+        <div class="progress_bar">
+            <p class="cutime">00:00</p>
+            <div class="bar">
+                <div class="bar1"></div>
+                <span></span></div>
+
+
+            <p class="ovtime">3:45</p>
+        </div>
+        <div class="btn">
+            <div class="pattern"></div>
+            <div class="up"></div>
+            <div class="start"></div>
+            <div class="next"></div>
+            <div class="voice"></div>
+            <div class="list"></div>
+        </div>
+    </div>
+    <div class="list_box">
+        <div class="list_head">
+            <input type="text">
+            <span></span>
+            <div class="list_headr">
+                <p class="one"></p>
+                <p class="one1"></p>
+                <p class="one11"></p>
+                <p class="one111"></p>
+                <p class="one1111"></p>
+                <p class="one11111"></p>
+            </div>
+            <div class="inputtext">
+                <ul>
+                    <!--<li><span>歌曲信息</span><span>歌手</span></li>-->
+                    <!--<li><span>歌曲信息</span><span>歌手</span></li>-->
+                    <!--<li><span>歌曲信息</span><span>歌手</span></li>-->
+                    <!--<li><span>歌曲信息</span><span>歌手</span></li>-->
+                    <!--<li><span>歌曲信息</span><span>歌手</span></li>-->
+                    <!--<li><span>歌曲信息</span><span>歌手</span></li>-->
+                    <!--<li><span>歌曲信息</span><span>歌手</span></li>-->
+                </ul>
+            </div>
+        </div>
+        <div class="list_title">
+            <p>乐库</p>
+            <p>MV</p>
+            <p>音乐人</p>
+            <p>主播</p>
+            <p>商城</p>
+            <p>歌词</p>
+        </div>
+        <div class="list_title1">
+            <div class="list_title11">
+                <p>推荐</p>
+                <p>排行榜</p>
+                <p>歌手</p>
+                <p>分类</p>
+            </div>
+        </div>
+        <div class="list_center">
+            <div class="list_centerl">
+                <ul>
+                    <li><span>歌曲信息</span><span>歌手</span></li>
+                    <li><span>歌曲信息</span><span>歌手</span></li>
+                    <li><span>歌曲信息</span><span>歌手</span></li>
+                    <li><span>歌曲信息</span><span>歌手</span></li>
+                    <li><span>歌曲信息</span><span>歌手</span></li>
+                    <li><span>歌曲信息</span><span>歌手</span></li>
+                    <li><span>歌曲信息</span><span>歌手</span></li>
+                    <li><span>歌曲信息</span><span>歌手</span></li>
+                    <li><span>歌曲信息</span><span>歌手</span></li>
+                </ul>
+            </div>
+            <div class="list_centerr"></div>
+        </div>
+    </div>
+    <audio></audio>
+</div>
+</body>
+<script src="../js/jquery.js"></script>
+<script>
+    //加载本地缓存
+    var data=localStorage.getItem("list_center")?
+        JSON.parse(localStorage.getItem("list_center")):[];
+    console.log(data);
+    // var data = [
+    //     {
+    //         singer: '满舒克',
+    //         song: '做我的猫',
+    //         pic: 'https://p3fx.kgimg.com/stdmusic/20171122/20171122120320558796.jpg',
+    //         url: 'http://fs.open.kugou.com/0005682a7d6cbcda41375114221df834/5d25aab0/G118/M07/0D/1F/FocBAFoU9sWAYwdvADrpg4ee0sA331.mp3',
+    //     }, {
+    //         singer: '焦迈奇',
+    //         song: '我的名字',
+    //         pic: 'https://p3fx.kgimg.com/stdmusic/20190428/20190428132614272046.jpg',
+    //         url: 'http://fs.open.kugou.com/a822645d29793ae11dc8dfff93a7a5b0/5d25ab95/G156/M02/17/07/fJQEAFzFH-uAQ4zvAD1rs8z0Ij8581.mp3',
+    //     }, {
+    //         singer: '薛之谦',
+    //         song: '方圆几里',
+    //         pic: 'https://p3fx.kgimg.com/stdmusic/20150715/20150715184807521489.jpg',
+    //         url: 'http://fs.open.kugou.com/727719996e38f39d7f6db4a6a62a94ff/5d25aaa8/G012/M04/06/09/TA0DAFUPcEiARXoYAEBcu3uKzm4952.mp3',
+    //     }, {
+    //         singer: '火鸡',
+    //         song: 'solo',
+    //         pic: 'https://p3fx.kgimg.com/commendpic/20160923/20160923162707215688.png',
+    //         url: 'http://fs.open.kugou.com/1356966b71781cfc6244be52d4f9a7a5/5d25adbd/G155/M02/16/11/O4cBAFyLHfCIQvGEAAV0tsMOebkAAABHQA7O_QABXTO211.mp3',
+    //     }
+    // ];
+    var audio = document.getElementsByTagName("audio")[0];
+    var start = document.getElementsByClassName("start")[0];
+    var img = document.getElementsByTagName("img")[0];
+    var song = document.getElementsByTagName("p")[0];
+    var singer = document.getElementsByTagName("p")[1];
+    var next = document.getElementsByClassName("next")[0];
+    var up = document.getElementsByClassName("up")[0];
+    var cutime = document.getElementsByClassName("cutime")[0];
+    var ovtime = document.getElementsByClassName("ovtime")[0];
+    var bar = document.getElementsByClassName("bar")[0];
+    var bar1 = document.getElementsByClassName("bar1")[0];
+    var span = document.getElementsByTagName("span")[0];
+    var pattern = document.getElementsByClassName("pattern")[0];
+    var list = document.getElementsByClassName("list")[0];
+    var list_box = document.getElementsByClassName("list_box")[0];
+    var one11111 = document.getElementsByClassName("one11111")[0];
+
+
+    var index = 0;  //下标
+    var rotateReg = 0;  //旋转角度
+    var timer = null;   //清空时间
+    var totime = 0;     //时间总长
+    var pattern1 = 0;  //下标，顺序/单曲/随机
+
+    //点击播放按钮
+    start.onclick = function () {
+        // audio.paused  暂停是true  播放是flase
+        if (audio.paused) {
+            play();
+        } else {
+            stop();
+        }
+    };
+
+    //点击下一曲按钮
+    next.onclick = function () {
+        index++;
+        init();
+        play();
+    };
+    //点击上一曲
+    up.onclick = function () {
+        index--;
+        init();
+        play();
+    };
+
+
+    //加入信息
+    function init() {
+        index = index > data.length - 1 ? 0 : index;
+        index = index < 0 ? data.length - 1 : index;
+        rotateReg = 0;
+        if(data.length){
+            audio.src = data[index].url;
+            img.src = data[index].pic;
+            song.innerHTML = data[index].song;
+            singer.innerHTML = data[index].singer;
+        }
+
+    }
+
+    init();
+
+    //播放函数
+    function play() {
+        start.style.backgroundPositionY = "-60px";
+        audio.play();
+        clearInterval(timer);
+        timer = setInterval(function () {
+            rotateReg++;
+            img.style.transform = "rotate(" + rotateReg + "deg)"
+        }, 40)
+    }
+
+    //暂停函数
+    function stop() {
+        clearInterval(timer);
+        start.style.backgroundPositionY = "0px";
+        audio.pause();
+    }
+
+    //如果获取音乐数据，必须等音频准备完成后会触发audio.oncanplay时间
+    audio.oncanplay = function () {
+        totime = audio.duration;
+        var min = parseInt(totime / 60);
+        var sed = parseInt(totime % 60);
+        ovtime.innerHTML = songTime(min) + ":" + songTime(sed);
+        //如果获取当前音乐数据，会触发audio.ontimeupdate时间
+        audio.ontimeupdate = function () {
+            var nmin = parseInt(audio.currentTime / 60);
+            var nsed = parseInt(audio.currentTime % 60);
+            cutime.innerHTML = songTime(nmin) + ":" + songTime(nsed);
+            var left = audio.currentTime / totime * bar.offsetWidth;
+            span.style.left = left - 7 + "px";
+            bar1.style.width = left + "px";
+            if (audio.ended) {
+                switch (pattern1) {
+                    case 0:
+                        index++;
+                        init();
+                        play();
+                        break;
+                    case 1:
+                        init();
+                        play();
+                        break;
+                    case 2:
+                        index = Math.floor(Math.random() * data.length);
+                        init();
+                        play();
+                        break;
+                }
+            }
+
+        }
+
+    };
+
+    //歌曲时长
+    function songTime(time) {
+        return time > 9 ? time : "0" + time;
+    }
+
+    //进度条
+    bar.onclick = function (e) {
+        console.log(e.offsetX);
+        //点击位置/总宽度*总时长=当前应该播放的位置
+        audio.currentTime = e.offsetX / bar.offsetWidth * totime;
+    };
+
+    //模式切换
+    pattern.onclick = function () {
+        // pattern1的值0为顺序  1为单曲播放 2为随机播放
+        pattern1++;
+        pattern1 = pattern1 > 2 ? 0 : pattern1;
+        switch (pattern1) {
+            case 0:
+                pattern.style.backgroundPosition = "-59px  -179px";
+                break;
+            case 1:
+                pattern.style.backgroundPosition = "5px  -179px";
+                break;
+            case 2:
+                pattern.style.backgroundPosition = "-123px  -179px";
+                break;
+        }
+    };
+    //点击按钮弹出框框
+    list.onclick = function () {
+        list_box.style.display = "block";
+        var rotateReg1 = 180;
+        one11111.style.transform = "rotate(" + rotateReg1 + "deg)";
+    };
+
+    one11111.onclick = function () {
+        list_box.style.display = "none";
+    };
+
+    //我的列表歌曲
+    function initlist() {
+        var str = "";
+        for (var i = 0; i < data.length; i++) {
+            str += "<li><span>" + data[i].song + "</span><span>" + data[i].singer + "</span></li>"
+        }
+        $(".list_centerl ul").html(str);
+    }
+
+    initlist();
+    init();
+
+    //中间的列表框
+    $(".list_centerl ul").on("click", "li", function () {
+        console.log($(this));
+        index = $(this).index();
+        init();
+        play();
+    });
+
+//跨域请求
+    $.ajaxPrefilter(function (options) {
+        if (options.crossDomain && jQuery.support.cors) {
+            var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
+            options.url = http + '//cors-anywhere.herokuapp.com/' + options.url;
+        }
+    });
+
+
+    //按下回车的时候触发键盘抬起事件
+    var datas = null;
+    $("input").on("keyup", function (e) {
+        if (e.keyCode === 13) {
+            $(".inputtext").css("display","block");
+            console.log($(".inputtext"));
+            $.ajax({
+                url: "http://mobilecdn.kugou.com/api/v3/search/song",
+                data: {
+                    // format=json&keyword=王力宏&page=1&pagesize=20&showtype=1
+                    format: "json",
+                    keyword: $(this).val(),
+                    page: 1,
+                    pagesize: 7,
+                    showtype: 1,
+                },
+                dataType: "json",
+                success: function (data) {
+                    datas = data.data.info;
+                    var str = "";
+                    var songname;
+                    for (var i = 0; i < datas.length; i++) {
+                       if(datas[i].songname.length > 7){
+                           songname=datas[i].songname.substr(0,9)+"....";
+                           } else {
+                           songname=datas[i].songname;
+                           }
+                        str += "<li><span>" +songname + "</span><span>" + datas[i].singername + "</span></li>"
+                    }
+                    $(".inputtext ul").html(str);
+                }
+            })
+        }
+    });
+
+    //点击搜索栏的li标签的时候
+    $(".inputtext ul").on("click", "li", function () {
+        $.ajax({
+            // http://m.kugou.com/app/i/getSongInfo.php?cmd=playInfo&hash=CB7EE97F4CC11C4EA7A1FA4B516A5D97
+            url: "http://m.kugou.com/app/i/getSongInfo.php",
+            type: "get",
+            data: {
+                cmd: "playInfo",
+                hash: datas[$(this).index()].hash
+            },
+            dataType: "json",
+            success: function (repData) {
+                console.log(repData);
+                data.push({
+                    singer:repData.singerName,
+                    song:repData.songName,
+                    pic:repData.imgUrl.replace('/{size}',''),
+                    url:repData.url,
+            });
+                initlist();
+                saveData();
+            },
+            error: function (err) {
+                console.log(err);
+
+            }
+        })
+    });
+
+
+        function saveData() {
+            localStorage.setItem("list_center",JSON.stringify(data));
+        }
+
+        //鼠标离开后框框收起来
+    $(".inputtext").on("mouseleave", function (){
+        $(".inputtext").css("display","none");
+    });
+</script>
+</html>
